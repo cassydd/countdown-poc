@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cookie_identifier: 1
+  time: MyString
+  email: MyString
+  timer_title: MyString
+
+two:
+  cookie_identifier: 1
+  time: MyString
+  email: MyString
+  timer_title: MyString

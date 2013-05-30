@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  countdown_user: 
+  email_address: MyString
+  scheduled_send_time: 2013-05-26 00:57:08
+
+two:
+  countdown_user: 
+  email_address: MyString
+  scheduled_send_time: 2013-05-26 00:57:08

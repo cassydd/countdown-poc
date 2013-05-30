@@ -1,0 +1,13 @@
+<h1>My timers</h1>
+
+
+<% @user_timers.order("created_at desc").each do |user_timer| %>
+	<%= form_for(user_timer) do |f| %>
+		<img src="/countdown_image/<%=user_timer.time %>"><br/>
+		<%=f.label :timer_title %>
+		<%=f.text_field :timer_title %>
+		<br/>
+		<%=f.label :email %>
+		<%=f.text_field :email%>
+	<% end %>
+<% end %>
