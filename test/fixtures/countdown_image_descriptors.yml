@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  background_image: MyString
+  background_color: MyString
+  text_color: MyString
+  pointsize: 1
+  font_weight: MyString
+  width: 1
+  height: 1
+  days_position_x: 1
+  days_position_y: 1
+  hours_position_x: 1
+  hours_position_y: 1
+  minutes_position_x: 1
+  minutes_position_y: 1
+  seconds_position_x: 1
+  seconds_position_y: 1
+
+two:
+  background_image: MyString
+  background_color: MyString
+  text_color: MyString
+  pointsize: 1
+  font_weight: MyString
+  width: 1
+  height: 1
+  days_position_x: 1
+  days_position_y: 1
+  hours_position_x: 1
+  hours_position_y: 1
+  minutes_position_x: 1
+  minutes_position_y: 1
+  seconds_position_x: 1
+  seconds_position_y: 1

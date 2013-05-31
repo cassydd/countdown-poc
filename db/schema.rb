@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130525145708) do
+ActiveRecord::Schema.define(version: 20130531014748) do
+
+  create_table "countdown_image_descriptors", force: true do |t|
+    t.string   "background_image"
+    t.string   "background_color"
+    t.string   "text_color"
+    t.integer  "pointsize"
+    t.string   "font_weight"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "days_position_x"
+    t.integer  "days_position_y"
+    t.integer  "hours_position_x"
+    t.integer  "hours_position_y"
+    t.integer  "minutes_position_x"
+    t.integer  "minutes_position_y"
+    t.integer  "seconds_position_x"
+    t.integer  "seconds_position_y"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "countdown_users", force: true do |t|
     t.string   "cookie_identifier"

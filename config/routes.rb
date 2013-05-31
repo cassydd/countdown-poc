@@ -1,4 +1,6 @@
 CountdownPoc::Application.routes.draw do
+  resources :countdown_image_descriptors
+
   get "user_scheduled_emails/new"
   get "user_scheduled_emails/create"
   get "user_scheduled_emails/update"

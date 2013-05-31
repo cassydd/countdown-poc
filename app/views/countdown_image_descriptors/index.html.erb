@@ -1,0 +1,55 @@
+<h1>Listing countdown_image_descriptors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Background image</th>
+      <th>Background color</th>
+      <th>Text color</th>
+      <th>Pointsize</th>
+      <th>Font weight</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th>Days position x</th>
+      <th>Days position y</th>
+      <th>Hours position x</th>
+      <th>Hours position y</th>
+      <th>Minutes position x</th>
+      <th>Minutes position y</th>
+      <th>Seconds position x</th>
+      <th>Seconds position y</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @countdown_image_descriptors.each do |countdown_image_descriptor| %>
+    <tr>
+      <td><%= countdown_image_descriptor.background_image %></td>
+      <td><%= countdown_image_descriptor.background_color %></td>
+      <td><%= countdown_image_descriptor.text_color %></td>
+      <td><%= countdown_image_descriptor.pointsize %></td>
+      <td><%= countdown_image_descriptor.font_weight %></td>
+      <td><%= countdown_image_descriptor.width %></td>
+      <td><%= countdown_image_descriptor.height %></td>
+      <td><%= countdown_image_descriptor.days_position_x %></td>
+      <td><%= countdown_image_descriptor.days_position_y %></td>
+      <td><%= countdown_image_descriptor.hours_position_x %></td>
+      <td><%= countdown_image_descriptor.hours_position_y %></td>
+      <td><%= countdown_image_descriptor.minutes_position_x %></td>
+      <td><%= countdown_image_descriptor.minutes_position_y %></td>
+      <td><%= countdown_image_descriptor.seconds_position_x %></td>
+      <td><%= countdown_image_descriptor.seconds_position_y %></td>
+      <td><%= link_to 'Show', countdown_image_descriptor %></td>
+      <td><%= link_to 'Edit', edit_countdown_image_descriptor_path(countdown_image_descriptor) %></td>
+      <td><%= link_to 'Destroy', countdown_image_descriptor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Countdown image descriptor', new_countdown_image_descriptor_path %>

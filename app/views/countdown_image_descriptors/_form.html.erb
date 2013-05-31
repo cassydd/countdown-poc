@@ -1,0 +1,77 @@
+<%= form_for(@countdown_image_descriptor) do |f| %>
+  <% if @countdown_image_descriptor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@countdown_image_descriptor.errors.count, "error") %> prohibited this countdown_image_descriptor from being saved:</h2>
+
+      <ul>
+      <% @countdown_image_descriptor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :background_image %><br />
+    <%= f.text_field :background_image %>
+  </div>
+  <div class="field">
+    <%= f.label :background_color %><br />
+    <%= f.text_field :background_color %>
+  </div>
+  <div class="field">
+    <%= f.label :text_color %><br />
+    <%= f.text_field :text_color %>
+  </div>
+  <div class="field">
+    <%= f.label :pointsize %><br />
+    <%= f.number_field :pointsize %>
+  </div>
+  <div class="field">
+    <%= f.label :font_weight %><br />
+    <%= f.text_field :font_weight %>
+  </div>
+  <div class="field">
+    <%= f.label :width %><br />
+    <%= f.number_field :width %>
+  </div>
+  <div class="field">
+    <%= f.label :height %><br />
+    <%= f.number_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :days_position_x %><br />
+    <%= f.number_field :days_position_x %>
+  </div>
+  <div class="field">
+    <%= f.label :days_position_y %><br />
+    <%= f.number_field :days_position_y %>
+  </div>
+  <div class="field">
+    <%= f.label :hours_position_x %><br />
+    <%= f.number_field :hours_position_x %>
+  </div>
+  <div class="field">
+    <%= f.label :hours_position_y %><br />
+    <%= f.number_field :hours_position_y %>
+  </div>
+  <div class="field">
+    <%= f.label :minutes_position_x %><br />
+    <%= f.number_field :minutes_position_x %>
+  </div>
+  <div class="field">
+    <%= f.label :minutes_position_y %><br />
+    <%= f.number_field :minutes_position_y %>
+  </div>
+  <div class="field">
+    <%= f.label :seconds_position_x %><br />
+    <%= f.number_field :seconds_position_x %>
+  </div>
+  <div class="field">
+    <%= f.label :seconds_position_y %><br />
+    <%= f.number_field :seconds_position_y %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
