@@ -11,8 +11,9 @@ class CountdownImageController < ApplicationController
     image_data = IO.read(path, mode:"rb")
     countdown_image = Countdown::CountdownImage.new {
       self.background_image = image_data
+      self.text_color = "black"
       self.countdown_seconds = 30
     }
-    send_data(countdown_image.create_image(time), :disposition=>'inline', :type=>'image/gif')
+    send_data(countdown_image.create_image(time), disposition: 'inline', type: 'image/gif')
   end
 end

@@ -29,6 +29,7 @@ class CountdownUsersController < ApplicationController
     respond_to do |format|
       if @countdown_user.update(countdown_user_params)
         format.html { redirect_to countdown_users_path, notice: 'Countdown was successfully updated.' }
+        format.js
         format.json { head :no_content }
       else
         format.html { redirect_to countdown_users_path, notice: 'Failed to update countdown.' }

@@ -3,17 +3,5 @@
 <p id="notice"><%= notice %></p>
 
 <div id="timers_div">
-<% @user_timers.order("created_at desc").each do |user_timer| %>
-	<%= form_for(user_timer, remote: true) do |f| %>
-		<h2><%=user_timer.timer_title %></h2>
-		<img src="/countdown_image/<%=user_timer.time %>"><br/>
-		<%=f.label :timer_title %>
-		<%=f.text_field :timer_title %>
-		<%=f.submit "Update" %>
-	<% end%>	
-	<br/>
-	<%= button_to 'Delete', user_timer, method: :delete, data: { confirm: 'Are you sure?' } %>
-	<%= link_to 'Notify me when this timer will expire', url_for(action: 'setup_scheduled_email', id: user_timer) if user_timer.user_scheduled_email.nil? %>
-	<%= link_to 'Cancel scheduled notification', url_for(action: 'remove_scheduled_email', id: user_timer) unless user_timer.user_scheduled_email.nil? %>
-<% end %>
+<%=render @user_timers.order("created_at desc")%>
 </div>

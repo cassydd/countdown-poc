@@ -1,0 +1,13 @@
+<div id="countdown_user_<%=countdown_user.id%>">
+<h2><%=countdown_user.timer_title %></h2>
+<img src="/countdown_image/<%=countdown_user.time %>"><br/>
+<%= form_for(countdown_user, remote: true) do |f| %>
+	<%=f.label :timer_title %>
+	<%=f.text_field :timer_title %>
+	<%=f.submit "Update" %>
+<% end%>	
+<br/>
+<%= button_to 'Delete', countdown_user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Notify me when this timer will expire', url_for(action: 'setup_scheduled_email', id: countdown_user) if countdown_user.user_scheduled_email.nil? %>
+<%= link_to 'Cancel scheduled notification', url_for(action: 'remove_scheduled_email', id: countdown_user) unless countdown_user.user_scheduled_email.nil? %>
+</div>
