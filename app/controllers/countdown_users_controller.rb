@@ -2,7 +2,9 @@ require 'rubygems'
 require 'rufus/scheduler'
 
 class CountdownUsersController < ApplicationController
-  before_action :set_countdown_user, only: [:show, :edit, :update, :destroy, :setup_scheduled_email, :schedule_email]
+  before_action :set_countdown_user, only: [:show, :edit, :update, :destroy, :setup_scheduled_email, :remove_scheduled_email, :schedule_email]
+
+  @@scheduler = Rufus::Scheduler.start_new
 
   def index
     user_token = cookies[:user_token]
@@ -38,6 +40,18 @@ class CountdownUsersController < ApplicationController
   def setup_scheduled_email
     @user_scheduled_email = UserScheduledEmail.new
   end
+  
+  def remove_scheduled_email
+    jobs = @@scheduler.find_by_tag(@countdown_user.user_scheduled_email.id)
+    respond_to do |format|
+      jobs.each {|job| logger.info "#{job.job_id}, #{job.params}" }
+      if jobs.each {|job| job.unschedule} && @countdown_user.user_scheduled_email.destroy
+        format.html { redirect_to countdown_users_path, notice: 'Notification has been cancelled.'}
+      else
+        format.html { redirect_to countdown_users_path, notice: 'Error cancelling the notification.'}
+      end
+    end
+  end
 
   def schedule_email
     @user_scheduled_email = UserScheduledEmail.new(user_scheduled_email_params)
@@ -45,8 +59,7 @@ class CountdownUsersController < ApplicationController
     @user_scheduled_email.scheduled_send_time = Time.parse(@countdown_user.time) - (params[:send_before].to_i * 60)
     respond_to do |format|
       if @user_scheduled_email.save
-        scheduler = Rufus::Scheduler.start_new
-        scheduler.at @user_scheduled_email.scheduled_send_time do
+        @@scheduler.at @user_scheduled_email.scheduled_send_time, tags: @user_scheduled_email.id do
           UserMailer.notification_email(@countdown_user).deliver
         end
         format.html {redirect_to countdown_users_path, notice: 'Notification has been set up.'}

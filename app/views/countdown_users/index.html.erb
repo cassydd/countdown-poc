@@ -13,6 +13,7 @@
 	<% end%>	
 	<br/>
 	<%= button_to 'Delete', user_timer, method: :delete, data: { confirm: 'Are you sure?' } %>
-	<%= link_to 'Notify me when this timer will expire', url_for(:action => 'setup_scheduled_email', :id => user_timer) if user_timer.user_scheduled_email.nil? %>
+	<%= link_to 'Notify me when this timer will expire', url_for(action: 'setup_scheduled_email', id: user_timer) if user_timer.user_scheduled_email.nil? %>
+	<%= link_to 'Cancel scheduled notification', url_for(action: 'remove_scheduled_email', id: user_timer) unless user_timer.user_scheduled_email.nil? %>
 <% end %>
 </div>
