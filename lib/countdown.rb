@@ -42,7 +42,7 @@ class CountdownImage
         self.delay = 100
       }
     else
-      base_image = Magick::Image.to_blob(@background_image) {
+      base_image = Magick::Image.from_blob(@background_image) {
         self.delay = 100
       }.first.resize(@width, @height)
     end
