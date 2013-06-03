@@ -31,15 +31,24 @@ class CountdownImage
   end
   
   def create_image(time)
-    image_list = Magick::ImageList.new
-    
+    image_list = Magick::ImageList.new {
+    }
     time_diff = TimeDifference.new(time, Time.new)
     o = self
+    base_image = nil
+    if (@background_image.nil?)
+      base_image = Magick::Image.new(@width, @height){
+        self.background_color = o.background_color                
+        self.delay = 100
+      }
+    else
+      base_image = Magick::Image.read('img01.jpg') {
+        self.delay = 100
+      }.first.resize(@width, @height)
+    end
+      
     @countdown_seconds.downto(1).each do |value|
-      image_list.new_image(@width, @height) {
-          self.background_color = o.background_color                
-          self.delay = 100
-        }
+      image = base_image.clone
 
       drawList = Magick::Draw.new { 
         self.gravity = Magick::SouthWestGravity
@@ -53,7 +62,8 @@ class CountdownImage
       drawList.text(@hours_position[:x], @hours_position[:y], "#{time_diff.hours}") 
       drawList.text(@minutes_position[:x], @minutes_position[:y], "#{time_diff.minutes}") 
       drawList.text(@seconds_position[:x], @seconds_position[:y], "#{time_diff.seconds}") 
-      drawList.draw(image_list.cur_image)
+      drawList.draw(image)
+      image_list << image
       break if time_diff.tick_down < 0
     end
 

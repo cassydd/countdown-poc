@@ -45,7 +45,7 @@ class CountdownUsersController < ApplicationController
     jobs = @@scheduler.find_by_tag(@countdown_user.user_scheduled_email.id)
     respond_to do |format|
       jobs.each {|job| logger.info "#{job.job_id}, #{job.params}" }
-      if jobs.each {|job| job.unschedule} && @countdown_user.user_scheduled_email.destroy
+      if jobs.first.unschedule && @countdown_user.user_scheduled_email.destroy
         format.html { redirect_to countdown_users_path, notice: 'Notification has been cancelled.'}
       else
         format.html { redirect_to countdown_users_path, notice: 'Error cancelling the notification.'}
