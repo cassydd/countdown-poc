@@ -1,6 +1,11 @@
 <div id="countdown_user_<%=countdown_user.id%>">
-<h2><%=countdown_user.timer_title %></h2>
-<img src="/countdown_image/<%=countdown_user.time %>" style="margin-bottom:5px;"><br/>
+<h2>
+	<%=countdown_user.timer_title || "Untitled"%>
+</h2>
+<p class="lead">
+	This countdown is set to expire at <b><%=countdown_user.time%></b>. Clearly I'm going to format this date and set it to the 
+	users timezone at some point so get off my back, Jack.
+</p> 
 <%= form_for(countdown_user, remote: true, html: {class: "form-horizontal"}) do |f| %>
 <div class="control-group">
 	<%=f.label :timer_title, class: "control-label" %>
@@ -24,3 +29,4 @@
 </div>
 </form>
 </div>
+<hr/>
