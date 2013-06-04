@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CountdownPoc</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+	<title>CountdownPoc</title>
+	<link rel="stylesheet" href="assets/bootstrap.css">
+	<link rel="stylesheet" href="assets/bootstrap-responsive.css">
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
+	
 </head>
 <body>
-
-<%= yield %>
-
+	<div class="container">
+	<div class="row">
+		<div class="span9"><%= yield %></div>
+		<div class="span3">
+			<h2>About Countdown</h2>
+			<p>
+				This is a small project by me to provide extra functionality to the image countdown timers that I sometimes see in
+				forums without injecting any scripting that may be rejected by the forum software. You can plonk down a timer that a user
+				can click on and be taken to a page that will show all of the still-active timers that they have clicked on. They can give the
+				timer a descriptive title, and they can set up an email notification to be sent a set amount of time before the countdown is due
+				to hit zero.
+			</p>
+			<p>
+				There is no logging in. A single cookie is set to track which timers the user has clicked on. Your email address is scrubbed 
+				from the system as soon as the email has been sent.
+			</p>
+		</div>
+	</div>
+	</div>
 </body>
 </html>
