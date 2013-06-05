@@ -3,8 +3,17 @@
 	<%=countdown_user.timer_title || "Untitled"%>
 </h2>
 <p class="lead">
-	This countdown is set to expire at <b><%=countdown_user.time%></b>. Clearly I'm going to format this date and set it to the 
-	users timezone at some point so get off my back, Jack.
+	<% 
+		#TODO move this stuff into a helper
+		time_difference = Countdown::TimeDifference.new(Time.parse(countdown_user.time), Time.new) 
+		countdown_datetime = Time.parse(countdown_user.time)
+	%>
+	<%if time_difference.time_difference > 0%>
+	This countdown is set to expire in <b><%=time_difference.to_s%></b>, 
+	<%else%>
+	This count expired 
+	<%end%>
+	at <strong><%=countdown_datetime.strftime("%I:%M:%S %p")%></strong> on <strong><%=countdown_datetime.strftime("%A, %B %d")%></strong>.
 </p> 
 <%= form_for(countdown_user, remote: true, html: {class: "form-horizontal"}) do |f| %>
 <div class="control-group">

@@ -95,6 +95,10 @@ class TimeDifference
     recalculate
     @time_difference
   end
+  
+  def to_s
+    "#{@days} days, #{@hours} hours, #{@minutes} minutes and #{@seconds} seconds"
+  end
     
   private
     def recalculate
