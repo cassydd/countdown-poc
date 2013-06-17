@@ -40,3 +40,4 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'rmagick'
 gem 'rufus-scheduler'
 gem 'letter_opener', group: :development
+gem 'icalendar'

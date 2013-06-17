@@ -25,15 +25,20 @@
 <div class="control-group">
 	<div class="controls">
 		<%=f.submit "Update", class: 'btn btn-primary' %>
+		<%= link_to 'Delete', countdown_user, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
 	</div>
 </div>
 <% end%>	
 <form class="form-horizontal">
 <div class="control-group">
 	<div class="controls">
-<%= link_to 'Delete', countdown_user, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Notify me when this timer will expire', url_for(action: 'setup_scheduled_email', id: countdown_user), class: 'btn btn-primary' if countdown_user.user_scheduled_email.nil? %>
+
+<%= link_to 'Remind me with Email', url_for(action: 'setup_scheduled_email', id: countdown_user), class: 'btn btn-primary' if countdown_user.user_scheduled_email.nil? %>
 <%= link_to 'Cancel scheduled notification', url_for(action: 'remove_scheduled_email', id: countdown_user), class: 'btn btn-primary', data: {confirm: 'Are you sure?'} unless countdown_user.user_scheduled_email.nil? %>
+<!-- allow the user to set up a google calendar alert -->
+<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=<%=countdown_user.timer_title%>&dates=<%=countdown_datetime.strftime("%Y%m%dT%H%M%SZ/%Y%m%dT%H%M%SZ")%>&trp=false&sprop=&sprop=name:" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
+<a href="http://calendar.live.com/calendar/calendar.aspx?rru=addevent&dtstart=<%=countdown_datetime.strftime("%Y%m%dT%H%M%S")%>&&dtend=<%=countdown_datetime.strftime("%Y%m%dT%H%M%S")%>&summary=<%=countdown_user.timer_title%>">Set a reminder in Windows Mail</a>
+
 	</div>
 </div>
 </form>

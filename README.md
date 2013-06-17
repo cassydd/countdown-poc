@@ -6,7 +6,7 @@ when the timer is about to expire.
 
 ## Who Are You?
 
-I'm [Chris Stratton][cassydd] and I'm pretty okay.
+I'm [Chris Stratton][cassydd] and I'm okay.
 
 ## License
 
