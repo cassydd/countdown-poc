@@ -1,16 +1,27 @@
 <h1>Setup an email notification</h1>
 
-<p>Setup an email notification to warn you when this timer is about to expire</p>
+<p class="lead">Setup an email notification to warn you when this timer is about to expire</p>
 
-<%=form_for(@user_scheduled_email, :url => url_for(:action => 'schedule_email'), :method => :post) do |f| %>
-	<%=f.label :email_address %>
+<%=form_for(@user_scheduled_email, url: url_for(:action => 'schedule_email'), :method => :post, html: {class: 'form-horizontal'}) do |f| %>
+<div class="control-group">
+	<%=f.label :email_address, class: "control-label" %>
+	<div class="controls">
 	<%=f.text_field :email_address %>
-	<br/>
-	Notify me before timer expires: 
+	</div>
+</div>
+<div class="control-group">
+	<%=f.label :send_before, "Notify me before timer expires:", class: "control-label", style: "padding-top:0px;" %> 
+	<div class="controls">
 	5 minutes <%=radio_button_tag :send_before, "5"%>
 	10 minutes <%=radio_button_tag :send_before, "10"%>
 	1 hour <%=radio_button_tag :send_before, "60"%>
 	2 hours <%=radio_button_tag :send_before, "120"%>
-	<br/>
-	<%=f.submit 'Schedule notification'%>
+	</div>
+</div>
+<div class="control-group">
+	<div class="controls">
+	<%=f.submit 'Schedule notification', class: "btn btn-primary"%>
+	<%= link_to 'Back', {controller: "countdown_users", action: :index}, class: 'btn btn-secondary' %>
+	</div>
+</div>
 <% end %>

@@ -1,0 +1,10 @@
+<script language="javascript">
+	var message = "An identical timer to this one has been found in your list of timers.\n"
+	message += "Are you sure you want to add this timer to your list of timers?"
+	if (confirm(message)) {
+		location.href = "<%=url_for(action: :index, time: params[:time], ignore_duplicate_check: 'true') %>"
+	}
+	else {
+		location.href = "<%=url_for(action: :index) %>"
+	}
+</script>

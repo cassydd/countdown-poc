@@ -17,6 +17,14 @@ class CountdownUsersController < ApplicationController
         :value => user_token, :expires => 1.year.from_now
       }
     end
+    time_param = params[:time]
+    
+    #if this is a duplicate timer display an alert to determine whether to add it anyway or discard it
+    unless time_param.nil? || params[:ignore_duplicate_check] == "true" || (existing_user_timer = CountdownUser.where("cookie_identifier = ? and time = ?", user_token, params[:time])).size == 0
+      redirect_to url_for(action: "duplicate_found", time: params[:time])
+      return
+    end
+
     @user_timers = CountdownUser.where("cookie_identifier = ?", user_token)
     unless params[:time].nil?
       @user_timer = CountdownUser.new
@@ -108,6 +116,8 @@ class CountdownUsersController < ApplicationController
     end
   end
 
+  def duplicate_found
+  end
 
   def show
   end
