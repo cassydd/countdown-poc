@@ -1,8 +1,11 @@
 require 'rubygems'
 require 'rufus/scheduler'
+require 'icalendar'
+require 'date'
 
 class CountdownUsersController < ApplicationController
-  before_action :set_countdown_user, only: [:show, :edit, :update, :destroy, :setup_scheduled_email, :remove_scheduled_email, :schedule_email]
+  before_action :set_countdown_user, only: [:show, :edit, :update, :destroy, :setup_scheduled_email, 
+    :remove_scheduled_email, :schedule_email, :calendar_event, :setup_calendar_event]
 
   @@scheduler = Rufus::Scheduler.start_new
 
@@ -42,6 +45,9 @@ class CountdownUsersController < ApplicationController
     @user_scheduled_email = UserScheduledEmail.new
   end
   
+  def setup_calendar_event
+  end
+  
   def remove_scheduled_email
     jobs = @@scheduler.find_by_tag(@countdown_user.user_scheduled_email.id)
     respond_to do |format|
@@ -66,6 +72,30 @@ class CountdownUsersController < ApplicationController
         format.html {redirect_to countdown_users_path, notice: 'Notification has been set up.'}
       else
         format.html { render action: 'setup_scheduled_email'}
+      end
+    end
+  end
+
+  def calendar_event
+    respond_to do |format|
+      format.html
+      format.ics do
+        calendar = Icalendar::Calendar.new
+        event_time = Time.parse(@countdown_user.time).strftime("%Y%m%dT%H%M%S")
+        send_before = params[:send_before].to_i
+        timer_title = @countdown_user.timer_title || "Untitled timer"
+        calendar.event do
+          dtstart   event_time
+          dtend     event_time
+          summary   timer_title
+          klass     "PRIVATE"
+          alarm do
+            summary   "#{timer_title} expiry"
+            trigger   "-PT#{send_before}M"
+          end
+        end
+        calendar.publish
+        render text: calendar.to_ical
       end
     end
   end

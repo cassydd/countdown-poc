@@ -1,4 +1,11 @@
 <div id="countdown_user_<%=countdown_user.id%>">
+	<table>
+		<tr>
+			<!-- Yuck! Style added so that the delete button aligns with the top of the title text. -->
+			<td style="vertical-align:top;padding:10px;padding-top:20px;">
+				<%= link_to 'X', countdown_user, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+			</td>
+			<td>
 <h2>
 	<%=countdown_user.timer_title || "Untitled"%>
 </h2>
@@ -15,32 +22,24 @@
 	<%end%>
 	at <strong><%=countdown_datetime.strftime("%I:%M:%S %p")%></strong> on <strong><%=countdown_datetime.strftime("%A, %B %d")%></strong>.
 </p> 
-<%= form_for(countdown_user, remote: true, html: {class: "form-horizontal"}) do |f| %>
-<div class="control-group">
+<%= form_for(countdown_user, remote: true, html: {class: "form-inline"}) do |f| %>
 	<%=f.label :timer_title, class: "control-label" %>
-	<div class="controls">
-		<%=f.text_field :timer_title %>
-	</div>
-</div>
-<div class="control-group">
-	<div class="controls">
-		<%=f.submit "Update", class: 'btn btn-primary' %>
-		<%= link_to 'Delete', countdown_user, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
-	</div>
-</div>
+	<%=f.text_field :timer_title %>
+	<%=f.submit "Update", class: 'btn btn-primary' %>
 <% end%>	
-<form class="form-horizontal">
-<div class="control-group">
-	<div class="controls">
-
+<div>
 <%= link_to 'Remind me with Email', url_for(action: 'setup_scheduled_email', id: countdown_user), class: 'btn btn-primary' if countdown_user.user_scheduled_email.nil? %>
 <%= link_to 'Cancel scheduled notification', url_for(action: 'remove_scheduled_email', id: countdown_user), class: 'btn btn-primary', data: {confirm: 'Are you sure?'} unless countdown_user.user_scheduled_email.nil? %>
-<!-- allow the user to set up a google calendar alert -->
-<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=<%=countdown_user.timer_title%>&dates=<%=countdown_datetime.strftime("%Y%m%dT%H%M%SZ/%Y%m%dT%H%M%SZ")%>&trp=false&sprop=&sprop=name:" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
-<a href="http://calendar.live.com/calendar/calendar.aspx?rru=addevent&dtstart=<%=countdown_datetime.strftime("%Y%m%dT%H%M%S")%>&&dtend=<%=countdown_datetime.strftime("%Y%m%dT%H%M%S")%>&summary=<%=countdown_user.timer_title%>">Set a reminder in Windows Mail</a>
-
-	</div>
+<!-- allow the user to set up a calendar alert -->
+<%= link_to 'Set up an iCalendar event', url_for(action: 'setup_calendar_event', id: countdown_user), class: 'btn'%>
 </div>
-</form>
+<div style="padding-top:10px;">
+<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=<%=countdown_user.timer_title%>&dates=<%=countdown_datetime.strftime("%Y%m%dT%H%M%SZ/%Y%m%dT%H%M%SZ")%>&trp=false&sprop=&sprop=name:" target="_blank"><img src="/assets/gc_button6.gif" border=0></a>
+<a href="http://calendar.live.com/calendar/calendar.aspx?rru=addevent&dtstart=<%=countdown_datetime.strftime("%Y%m%dT%H%M%S")%>&&dtend=<%=countdown_datetime.strftime("%Y%m%dT%H%M%S")%>&summary=<%=countdown_user.timer_title%>" target="_blank"><img src="/assets/add_to_microsoft_outlook.jpg" alt="Set a reminder in Outlook Web Mail" /></a>
+<a href="http://calendar.yahoo.com/?v=60&view=d&type=20&title=<%=countdown_user.timer_title%>&st=<%=countdown_datetime.strftime("%Y%m%d%H%M%S")%>" target="_blank"><img src="/assets/yahoo_calendar.gif" alt="Set a reminder in Yahoo Web Mail" /></a>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <hr/>

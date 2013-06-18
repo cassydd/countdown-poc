@@ -21,6 +21,8 @@ CountdownPoc::Application.routes.draw do
   #   resources :products
   controller :countdown_users do
     get 'countdown_users/:id/setup_scheduled_email' => :setup_scheduled_email
+    get 'countdown_users/:id/setup_calendar_event' => :setup_calendar_event
+    post 'countdown_users/:id/calendar_event' => :calendar_event
     get 'countdown_users/:id/remove_scheduled_email' => :remove_scheduled_email
     post 'countdown_users/:id/schedule_email' => :schedule_email
   end

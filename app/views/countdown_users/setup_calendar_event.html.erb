@@ -1,0 +1,21 @@
+<h1>Setup an email notification</h1>
+
+<p>Setup an email notification to warn you when this timer is about to expire</p>
+
+<%=form_tag({:action => 'calendar_event', format: :ics}, method: :post, class: "form-horizontal") do %>
+	<div class="control-group">
+		<%= label_tag :send_before, "Notify me before timer expires:", class: "control-label" %>
+		<div class="controls">
+			5 minutes <%=radio_button_tag :send_before, "5"%>
+			10 minutes <%=radio_button_tag :send_before, "10"%>
+			1 hour <%=radio_button_tag :send_before, "60"%>
+			2 hours <%=radio_button_tag :send_before, "120"%>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<%=submit_tag 'Create calendar event', class: 'btn btn-primary'%>
+			<%= link_to 'Back', {controller: "countdown_users", action: :index}, class: 'btn btn-secondary' %>
+		</div>
+	</div>
+<% end %>
