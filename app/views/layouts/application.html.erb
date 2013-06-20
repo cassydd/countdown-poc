@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>CountdownPoc</title>
-	<link rel="stylesheet" href="/assets/bootstrap.css">
-	<link rel="stylesheet" href="/assets/bootstrap-responsive.css">
-	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<link rel="stylesheet" href="/assets/bootstrap.css" />
+	<link rel="stylesheet" href="/assets/bootstrap-responsive.css" />
+	
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
 	
@@ -12,20 +12,24 @@
 <body>
 	<div class="container">
 	<div class="row">
-		<div class="span9" style="overflow: scroll;"><%= yield %></div>
+		<div class="span9" style="overflow-x: auto;"><%= yield %></div>
 		<div class="span3">
+			<h2>Links</h2>
+			<p><%=link_to "Generate a countdown GIF", controller: "generate_countdown_url" %>
 			<h2>About Countdown</h2>
 			<p>
-				This is a small project by me to provide extra functionality to the image countdown timers that I sometimes see in
-				forums without injecting any scripting that may be rejected by the forum software. You can plonk down a timer that a user
+				This is a small project by me to provide extra functionality to the image countdown timer GIFs (pronounced 'jif') that I sometimes see 
+				in forums without injecting any scripting that may be rejected by the forum software. You can plonk down a timer that a user
 				can click on and be taken to a page that will show all of the still-active timers that they have clicked on. If you're on
 				this page after clicking on a timer, you can give the timer a descriptive title on this page and you can set up an email notification
 				to warn you when the timer is going to expire or you can set up a calendar event in Google calendar.
 			</p>
 			<p>
-				There is no logging in. A single cookie is set to track which timers the user has clicked on. Your email address is scrubbed 
-				from the system as soon as the email has been sent.
+				There is no logging in. A single cookie is set to track which timers the user has clicked on. If you use the email reminder
+				feature your email address is scrubbed from the system as soon as the email has been sent.
 			</p>
+			<p>
+				
 			<p>
 				The code for this little application is <a href="https://github.com/cassydd/countdown-poc">on Github</a>. The code is available under the MIT license so feel free to fork and roll your own GIF timer.
 			</p>

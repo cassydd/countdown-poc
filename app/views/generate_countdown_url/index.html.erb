@@ -1,0 +1,60 @@
+<link rel="stylesheet" media="all" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />	
+<link rel="stylesheet" href="/assets/jquery-ui-timepicker-addon.css" />
+<!-- Styles required to keep the hour and minutes selectors inside the picker -->
+<style>
+.ui_tpicker_hour_slider select {
+	width: 8em;
+	margin-bottom: 0em;
+	padding-bottom: 0em;
+}
+.ui_tpicker_minute_slider select {
+	width: 8em;
+	margin-bottom: 0em;
+	padding-bottom: 0em;
+}
+.ui_tpicker_timezone select {
+	width: 7em;
+	margin-bottom: 0em;
+	padding-bottom: 0em;
+}
+.ui-timepicker-div dl dd {
+	margin-left: 7em;
+}
+.ui-timepicker-div dl dt {
+	margin-bottom: -2.2em;
+}
+.ui-datepicker {
+	font-size:90%;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+	$('#date_time').datetimepicker({
+		controlType: 'select',
+		timeFormat: 'hh:mm tt'
+	});
+});
+</script>
+
+<h1>Generate a countdown Url</h1>
+<p class="lead">Just enter the date and time that you want your timer to expire, and whether you want the timer to be 'clickable' or not
+	and click the 'Generate' button, then copy the code from the 'Generated HTML' text area and paste it where you want the timer to appear.</p>
+	
+<form class="form-horizontal">
+	<div>
+		Let the user click through to the reminders page: <%= radio_button_tag :has_link, "yes", checked: true%> Yes <%=radio_button_tag :has_link, "no"%> No
+	</div>
+	<div class="control-groups">
+		<%= label_tag :expire_time, "Expire time: "%>
+		<div class="controls">
+			<%= text_field_tag :date_time%>
+		</div>
+	</div>
+	<div class="control-groups">
+		<%= label_tag :generated_html, "Generated HTML: "%>
+		<div class="controls">
+			<%= text_area_tag :generated_html, "", rows: 5, cols: 60 %>
+		</div>
+	</div>
+</form>
